@@ -1,8 +1,10 @@
 package com.envisioncn.gssc.libra.schedule;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
@@ -15,9 +17,10 @@ import java.util.List;
  * @author jonnas
  * @date 2021-04-06
  */
+@Component
 public class JobTriggerDao implements RowMapper<JobTrigger> {
     @Autowired
-    DataSource dataSource;
+    DruidDataSource dataSource;
 
     @Transactional
     public void saveOrUpdate(JobTrigger [] triggers) {
