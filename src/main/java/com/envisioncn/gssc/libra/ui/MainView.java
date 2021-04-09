@@ -346,6 +346,7 @@ public class MainView extends AppLayout implements JobEventListener {
         log.debug("createMainView.end");
 
     }
+
     private Component createUserMenu() {
         Label lSignout = new Label("Logout");
         lSignout.addComponentAsFirst(VaadinIcon.SIGN_OUT.create());
@@ -462,7 +463,7 @@ public class MainView extends AppLayout implements JobEventListener {
             String currentSplit = null;
             String currentFlow = null;
             HashMap<String, MutableLong> flowDurations = Maps.newHashMap();
-            // Which flows runs within which splits?
+            // TODO: Which flows runs within which splits?
             HashMap<String, Set<String>> splitToFlows = Maps.newHashMap();
             HashMap<String, Long> splitDurations = Maps.newHashMap();
             HashMap<String, String> flowAlias = Maps.newHashMap();
@@ -474,7 +475,7 @@ public class MainView extends AppLayout implements JobEventListener {
                         currentFlow = step.getFlowId();
                         flowDurations.put(currentFlow, new MutableLong(0));
                         flowCount++;
-                        flowAlias.put(currentFlow, "flow-"+flowCount);
+                        flowAlias.put(currentFlow, "flow-" + flowCount);
                         splitToFlows.putIfAbsent(step.getSplitId(), new HashSet<>());
                         splitToFlows.get(step.getSplitId()).add(step.getFlowId());
                     }
@@ -561,7 +562,6 @@ public class MainView extends AppLayout implements JobEventListener {
 
     }
 
-
     private Component createStatusLabel(String executionStatus, boolean oldExecution) {
         Div statusLabel = new Div();
         statusLabel.addClassNames("batch_status", "batch_status_label");
@@ -641,6 +641,7 @@ public class MainView extends AppLayout implements JobEventListener {
         }
         return vl;
     }
+
     private Dialog createJobParamsDialog(JobInstanceInfo job) {
         Dialog dialog = new Dialog();
         dialog.setWidth("700");

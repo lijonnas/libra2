@@ -33,8 +33,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -129,8 +127,7 @@ public class LibraManager implements StepExecutionListener, JobExecutionListener
         threadPoolTaskScheduler
                 = new ThreadPoolTaskScheduler();
         threadPoolTaskScheduler.setPoolSize(5);
-        threadPoolTaskScheduler.setThreadNamePrefix(
-                "JobTriggerScheduler");
+        threadPoolTaskScheduler.setThreadNamePrefix("JobTriggerScheduler");
         log.info("Home is {}", libraConfig.getProperty(LibraConfigParams.HOME_DIR));
         log.info("properties: {}", getServerInfo().toArray());
         initializeScheduling(false);
@@ -230,7 +227,7 @@ public class LibraManager implements StepExecutionListener, JobExecutionListener
         }
         Set<Long> runningExecutions = jobOperator.getRunningExecutions(jobName);
         if (runningExecutions.size() > 0) {
-            throw new JobInstanceAlreadyExistsException("Job " + jobName+" is already running");
+            throw new JobInstanceAlreadyExistsException("Job " + jobName + " is already running");
         }
         DateTimeFormatter dtf = DateTimeFormatter.ISO_DATE_TIME;
         StringBuilder paramsStr = new StringBuilder();

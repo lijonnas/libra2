@@ -1,6 +1,7 @@
 package com.envisioncn.gssc.libra.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.envisioncn.gssc.libra.YamlPropertySourceFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +38,8 @@ import javax.sql.DataSource;
  * @author jonnas
  * @date 2021-04-07
  */
-@PropertySource("libra-default.yml")
-@Configuration()
+@PropertySource(value = "libra-default.yml", factory = YamlPropertySourceFactory.class)
+@Configuration
 @ImportResource({
 //        "classpath:spring-beans/job-common.xml",
         "file://${libra.jobBeansDir}/*.xml",
@@ -54,7 +55,7 @@ public class BatchConfiguration {
     @Value("${libra.stagingDB.url:}")
     String stagingDbUrl;
 
-    @Value("${libra.stagingDB.driverClassName:}")
+    @Value("${libra.stagingDB.driverClassName:org.postgresql.Driver}")
     String stagingDbDriverClassName;
 
     @Value("${libra.stagingDB.username:}")
@@ -68,6 +69,12 @@ public class BatchConfiguration {
 
     @Value(value = "${libra.batchDataSource.url:}")
     String batchDataSourceUrl;
+
+    @Value(value = "${libra.batchDataSource.username:}")
+    String batchDataSourceUsername;
+
+    @Value(value = "${libra.batchDataSource.password:}")
+    String batchDataSourcePassword;
 
     @Value(value = "${libra.batch.executor.maxThreads:50}")
     int multiThreadExecutorMaxPoolSize;
@@ -95,8 +102,8 @@ public class BatchConfiguration {
         dataSource.setMaxActive(100);
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl(batchDataSourceUrl);
-        dataSource.setUsername("jonnas");
-        dataSource.setPassword("123456");
+        dataSource.setUsername(batchDataSourceUsername);
+        dataSource.setPassword(batchDataSourcePassword);
         dataSource.setMaxWait(60*1000);
         dataSource.setTimeBetweenEvictionRunsMillis(60*1000);
         dataSource.setMinEvictableIdleTimeMillis(30*1000*10);

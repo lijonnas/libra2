@@ -14,11 +14,9 @@ public class ApplicationContextUtil implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     private static synchronized ApplicationContextUtil getInstance(){
-
         if(instance == null){
             instance = new ApplicationContextUtil();
         }
-
         return instance;
     }
 
@@ -28,10 +26,13 @@ public class ApplicationContextUtil implements ApplicationContextAware {
         if(getInstance().applicationContext == null){
             getInstance().applicationContext = applicationContext;
         }
-
     }
 
     public static ApplicationContext getApplicationContext(){
         return getInstance().applicationContext;
+    }
+
+    public static Object getBean(String name) {
+        return getInstance().applicationContext.getBean(name);
     }
 }

@@ -37,3 +37,6 @@ build/
 **/*.json
 **/*.js
 **/pnpm-lock.yaml
+
+
+LOGS_IS_UNDEFINED/

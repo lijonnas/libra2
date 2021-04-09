@@ -1,25 +1,91 @@
 libra:
     batchDataSource:
         url: jdbc:postgresql://localhost:5432/jonnas
-    dataDir: ${libra.homeDir}/data
+        username: jonnas
+        password: 123456
+    stagingDB:
+        url: jdbc:postgresql://localhost:5432/jonnas
+        username: jonnas
+        password: 123456
     homeDir: /Users/zhongshuangli/source/mycode/projects/libra/libra_home
-    jobBeansDir: ${libra.homeDir}/jobs
-    jobBeansDir2: ${libra.homeDir}/jobs
-    jobBeansDir3: ${libra.homeDir}/jobs
-    reportDir: ${libra.homeDir}/reports
-    scriptDir: ${libra.homeDir}/scripts
-    # Efter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
-    # fetching the state and send it to jobExecutionListeners
-    updateThreadSleepBeforeUpdate: 300
-    version: '@project.version@'
+#    dataDir: ${libra.homeDir}/data
+#    jobBeansDir: ${libra.homeDir}/jobs
+#    jobBeansDir2: ${libra.homeDir}/jobs
+#    jobBeansDir3: ${libra.homeDir}/jobs
+#    reportDir: ${libra.homeDir}/reports
+#    scriptDir: ${libra.homeDir}/scripts
+#    # Enter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
+#    # fetching the state and send it to jobExecutionListeners
+#    updateThreadSleepBeforeUpdate: 300
+#    version: ^project.version^
+#    # Rebuild command. Typically stops libra process, fetches latest code, scripts, beans from VCS
+#    # and then starts a fresh process
+#    rebuildServerCommand: ${libra.homeDir}/bin/rebuild_server.sh
+#    # Refresh command. Typically calls a script that refreshes scripts, input data etc
+#    refreshServerCommand: ${libra.homeDir}/bin/refresh_server.sh
 
+# Enables the interactive shell. If you use the web UI, keep this disabled
+spring.shell.interactive.enabled: false
+
+#vaadin.productionMode: true
 vaadin.pnpm.enable: true
 
-spring:
-    autoconfigure:
-        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+## Disable security for testing purposes
+#spring:
+#    autoconfigure:
+#        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
-#spring.security.user:
-#    name: admin
-#    password: 123456
-#    roles: ADMIN
+spring.security.user:
+    name: admin
+    password: 123456
+    roles: ADMIN,BATCH_VIEW,BATCH_EXECUTE
+
+#spring:
+#    batch:
+#        initialize-schema: never
+#        job.enabled: false
+#    datasource:
+#        druid:
+#            initial-size: 5
+#            max-active: 20
+#            max-wait: 10
+#            min-idle: 5
+#            validationQuery: SELECT 1
+#        initialization-mode: never
+#        name: defaultDataSource
+#        password: 123456
+#        schema: classpath:sql/schema-postgresql.sql
+#        sql-script-encoding: UTF-8
+#        type: com.alibaba.druid.pool.DruidDataSource
+#        url: jdbc:postgresql://localhost:5432/jonnas
+#        username: jonnas
+#    quartz:
+#        auto-startup: true
+#        jdbc:
+#            initialize-schema: never
+#        job-store-type: jdbc
+#        overwrite-existing-jobs: true
+#        properties:
+#            org:
+#                quartz:
+#                    jobStore:
+#                        class: org.quartz.impl.jdbcjobstore.JobStoreTX
+#                        clusterCheckinInterval: 50000
+#                        dataSource: quartz
+#                        driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+#                        isClustered: true
+#                        tablePrefix: qrtz_
+#                        useProperties: false
+#                    scheduler:
+#                        instanceId: auto
+#                        instanceName: clusteredScheduler
+#                    threadPool:
+#                        class: org.quartz.simpl.SimpleThreadPool
+#                        threadCount: 10
+#                        threadPriority: 5
+#                        threadsInheritContextClassLoaderOfInitializingThread: true
+#    security:
+#      user:
+#          name: admin
+#          password: 123456
+#          roles: ADMIN,BATCH_VIEW,BATCH_EXECUTE
