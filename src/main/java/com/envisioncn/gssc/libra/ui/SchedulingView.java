@@ -115,11 +115,11 @@ public class SchedulingView extends VerticalLayout implements SelectionListener<
 
         addCronButton = new Button("Add CRON trigger ..", clickEvent -> addCron(null));
         addCronButton.setIcon(VaadinIcon.CALENDAR_CLOCK.create());
-        // addCronButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        addCronButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         buttons.add(addCronButton);
         addJobCompletionButton = new Button("Add Job complete trigger ..", clickEvent -> addJobCompletion(null));
         addJobCompletionButton.setIcon(VaadinIcon.FLAG_CHECKERED.create());
-        // addJobCompletionButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        addJobCompletionButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         buttons.add(addJobCompletionButton);
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
@@ -330,6 +330,7 @@ public class SchedulingView extends VerticalLayout implements SelectionListener<
         update();
         libraManager.initializeScheduling(true);
     }
+
     private void saveOrUpdate(JobTrigger jobTrigger) {
         jobTriggerDao.saveOrUpdate(jobTrigger);
         update();

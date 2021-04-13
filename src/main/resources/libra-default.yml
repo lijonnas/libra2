@@ -7,15 +7,27 @@ vaadin:
 server.servlet.session.timeout: 300
 
 libra:
+  dataDir: ${libra.homeDir}/data
+  jobBeansDir: ${libra.homeDir}/jobs
+  jobBeansDir2: ${libra.homeDir}/jobs
+  jobBeansDir3: ${libra.homeDir}/jobs
+  reportDir: ${libra.homeDir}/reports
+  scriptDir: ${libra.homeDir}/scripts
+  # Enter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
+  # fetching the state and send it to jobExecutionListeners
+  updateThreadSleepBeforeUpdate: 300
+  version: ^project.version^
+  # Rebuild command. Typically stops libra process, fetches latest code, scripts, beans from VCS
+  # and then starts a fresh process
+  rebuildServerCommand: ${libra.homeDir}/bin/rebuild_server.sh
+  # Refresh command. Typically calls a script that refreshes scripts, input data etc
+  refreshServerCommand: ${libra.homeDir}/bin/refresh_server.sh
 #  version: '@project.version@'
   buildTime: '@librabuildtimestamp@'
   build: 0
 #  # Efter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
 #  # fetching the state and send it to jobExecutionListeners
 #  updateThreadSleepBeforeUpdate: 300
-  # Additional job bean directories
-  jobBeansDir2: replaceme
-  jobBeansDir3: replaceme
   jobRepository.isolationLevelForCreate: ISOLATION_READ_COMMITTED
 
 spring:
@@ -62,3 +74,4 @@ spring:
             threadCount: 10
             threadPriority: 5
             threadsInheritContextClassLoaderOfInitializingThread: true
+

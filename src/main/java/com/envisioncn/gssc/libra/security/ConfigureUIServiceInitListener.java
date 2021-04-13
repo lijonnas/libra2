@@ -42,9 +42,7 @@ public class ConfigureUIServiceInitListener implements VaadinServiceInitListener
             Cookie localeCookie = request.getCookies() != null ? Arrays.stream(request.getCookies()).filter(c -> c.getName().equals(LOCALE_COOKIE_NAME)).findFirst().orElse(null) : null;
 
             if (localeCookie != null) {
-
                 log.debug("Found cookie {}", localeCookie.getValue());
-
                 Locale l = LocaleUtils.toLocale(localeCookie.getValue());
                 log.debug("Setting session locale: {}", l);
                 session.setLocale(l);

@@ -17,14 +17,18 @@ libra:
     # fetching the state and send it to jobExecutionListeners
     updateThreadSleepBeforeUpdate: 300
     version: $project.version$
+# Enables the interactive shell. If you use the web UI, keep this disabled
+spring.shell.interactive.enabled: false
 
+#vaadin.productionMode: true
 vaadin.pnpm.enable: true
 
-spring:
-    autoconfigure:
-        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+## Disable security for testing purposes
+#spring:
+#    autoconfigure:
+#        exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 
-#spring.security.user:
-#    name: admin
-#    password: 123456
-#    roles: ADMIN
+spring.security.user:
+    name: admin
+    password: 123456
+    roles: ADMIN,BATCH_VIEW,BATCH_EXECUTE

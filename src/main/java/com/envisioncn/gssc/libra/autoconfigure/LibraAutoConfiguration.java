@@ -58,7 +58,8 @@ public class LibraAutoConfiguration implements EnvironmentPostProcessor {
     @Bean
     @ConditionalOnMissingBean
     @DependsOn("dataSourceInitializer")
-    public LibraManager libraManager(LibraConfig libraConfig, JobOperator jobOperator, JobRepository jobRepository, JobExplorer jobExplorer, JobRegistry jobRegistry) {
+    public LibraManager libraManager(LibraConfig libraConfig, JobOperator jobOperator
+            , JobRepository jobRepository, JobExplorer jobExplorer, JobRegistry jobRegistry) {
         return new LibraManager(libraConfig, jobOperator, jobRepository, jobExplorer, jobRegistry);
     }
 
