@@ -1,5 +1,6 @@
 package com.envisioncn.gssc.libra.config;
 
+import com.alibaba.druid.DbType;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,10 +38,10 @@ import javax.sql.DataSource;
  * @author jonnas
  * @date 2021-04-07
  */
-@PropertySource("libra-default.yml")
+@PropertySource(value = "libra-default.yml")
 @Configuration()
 @ImportResource({
-//        "classpath:spring-beans/job-common.xml",
+        "classpath:spring-beans/job-common.xml",
         "file://${libra.jobBeansDir}/*.xml",
         "file://${libra.jobBeansDir2}/*.xml",
         "file://${libra.jobBeansDir3}/*.xml"
@@ -76,6 +77,12 @@ public class BatchConfiguration {
     @Value(value = "${libra.batch.executor.queueCapacity:9999999}")
     int multiThreadExecutorQueueCapacity;
 
+    @Value(value = "${libra.version}")
+    String version;
+
+    @Value(value = "${libra.updateThreadSleepBeforeUpdate}")
+    int updateThreadSleepBeforeUpdate;
+
     /**
      * Semicolon-separated list of extra properties to pass to the DataSource upon creation.
      * Typically not needed. One use-case is when using Oracle Wallet for authentication. Then you
@@ -93,6 +100,7 @@ public class BatchConfiguration {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setInitialSize(1);
         dataSource.setMaxActive(100);
+        dataSource.setDbType(DbType.postgresql);
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl(batchDataSourceUrl);
         dataSource.setUsername("jonnas");

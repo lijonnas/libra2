@@ -1,6 +1,11 @@
 libra:
     batchDataSource:
         url: jdbc:postgresql://localhost:5432/jonnas
+    stagingDB:
+        url: jdbc:postgresql://localhost:5432/jonnas
+        driverClassName:
+        username: jonnas
+        password: 123456
     dataDir: ${libra.homeDir}/data
     homeDir: /Users/zhongshuangli/source/mycode/projects/libra/libra_home
     jobBeansDir: ${libra.homeDir}/jobs
@@ -8,10 +13,10 @@ libra:
     jobBeansDir3: ${libra.homeDir}/jobs
     reportDir: ${libra.homeDir}/reports
     scriptDir: ${libra.homeDir}/scripts
-    # Efter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
+    # Enter an beforeJob, beforeStep, afterJob, afterStep event has been fired, let spring batch save the state before
     # fetching the state and send it to jobExecutionListeners
     updateThreadSleepBeforeUpdate: 300
-    version: '@project.version@'
+    version: $project.version$
 
 vaadin.pnpm.enable: true
 

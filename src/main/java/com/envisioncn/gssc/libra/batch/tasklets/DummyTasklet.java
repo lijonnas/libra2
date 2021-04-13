@@ -64,7 +64,6 @@ public class DummyTasklet implements StoppableTasklet, Tasklet {
             }
         }
 
-
         if (finished) {
             checkCount = 0;
             if (failureCount < emulateFailures) {
